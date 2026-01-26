@@ -1,0 +1,10 @@
+---
+- name: pratice playbook 
+  hosts: local
+
+  tasks:
+    - name: create a folder
+      file:
+        path: ~/Happy
+        state: directory
+
