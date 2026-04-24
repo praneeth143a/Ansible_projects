@@ -1,17 +1,22 @@
 ---
- - name: create a folders and files in db
-   hosts: all
+- name: create folders and files in db
+  hosts: all
 
-   tasks:
-     - name: create a folder
-       file:
-         path: /home/ubuntu/happy
-         state: directory
-     - name: create a file inside the folder
-       file:
-         path: /home/ubuntu/happy/file.txt
-         state: touch
-     - name: paste the content in file
-       copy:
-         dest: /home/ubuntu/happy/file.txt
-         content: "Success, playbook is working.."
+  tasks:
+    - name: create a folder
+      file:
+        path: /home/ubuntu/happy
+        state: directory
+
+    - name: create file and add content
+      copy:
+        dest: /home/ubuntu/happy/file.txt
+        content: "Success, playbook is working.."
+
+    - name: display file content (output)
+      shell: cat /home/ubuntu/happy/file.txt
+      register: result
+
+    - name: show output on screen
+      debug:
+        var: result.stdout
